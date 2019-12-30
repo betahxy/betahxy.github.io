@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: './public/search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Prerequisitephp + nginx + mysql Install mysql8.0+1234567891011121314151617181920212223242526272829303132333435brew install mysql &#x2F; sudo apt install mysql-server#We need sudo to login root user for mys">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Wordpress configuration">
+<meta property="og:url" content="http://yoursite.com/2019/12/28/wordpress-configuration/index.html">
+<meta property="og:site_name" content="betahxy&#39;s blogs">
+<meta property="og:description" content="Prerequisitephp + nginx + mysql Install mysql8.0+1234567891011121314151617181920212223242526272829303132333435brew install mysql &#x2F; sudo apt install mysql-server#We need sudo to login root user for mys">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-12-28T13:55:25.000Z">
+<meta property="article:modified_time" content="2019-12-29T12:47:25.490Z">
+<meta property="article:author" content="betahxy">
+<meta property="article:tag" content="wordpress">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/12/28/wordpress-configuration/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Wordpress configuration | betahxy's blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">betahxy's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/28/wordpress-configuration/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="betahxy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="betahxy's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Wordpress configuration
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-12-28 21:55:25" itemprop="dateCreated datePublished" datetime="2019-12-28T21:55:25+08:00">2019-12-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-29 20:47:25" itemprop="dateModified" datetime="2019-12-29T20:47:25+08:00">2019-12-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h2><p><code>php</code> + <code>nginx</code> + <code>mysql</code></p>
+<h2 id="Install-mysql8-0"><a href="#Install-mysql8-0" class="headerlink" title="Install mysql8.0+"></a>Install mysql8.0+</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">brew install mysql / sudo apt install mysql-server</span><br><span class="line"></span><br><span class="line"><span class="comment">#We need sudo to login root user for mysql8.0+</span></span><br><span class="line"><span class="comment">#Password is empty</span></span><br><span class="line">$ sudo mysql -u root -p</span><br><span class="line"></span><br><span class="line"><span class="comment">#Mysql recommend mysql_secure_installation command to set up password for root user</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Create user in mysql</span></span><br><span class="line"><span class="comment">#[WITH mysql_native_password] is optional</span></span><br><span class="line"><span class="comment">#localhost is your IP，‘%‘ indicates any IP address</span></span><br><span class="line">$ CREATE USER <span class="string">'username'</span>@<span class="string">'localhost'</span> IDENTIFIED [WITH mysql_native_password] BY <span class="string">'password'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#Change password for a user</span></span><br><span class="line">$ ALTER USER <span class="string">'username'</span>@<span class="string">'localhost'</span> IDENTIFIED WITH mysql_native_password BY <span class="string">'password'</span>;  </span><br><span class="line">$ FLUSH PRIVILEGES;  </span><br><span class="line"></span><br><span class="line"><span class="comment">#Delete user</span></span><br><span class="line">$ DROP USER <span class="string">'username'</span>@<span class="string">'localhost'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#Grant user privileges</span></span><br><span class="line"><span class="comment">#privileges: like select, insert, etc</span></span><br><span class="line"><span class="comment">#databasename.tablename: your database name and table name</span></span><br><span class="line"><span class="comment">#[WITH GRANT OPTION] is optional</span></span><br><span class="line">$ GRANT privileges ON databasename.tablename TO <span class="string">'username'</span>@<span class="string">'host'</span> [WITH GRANT OPTION];</span><br><span class="line"></span><br><span class="line"><span class="comment">#eg:</span></span><br><span class="line">$ GRANT select,insert,update,delete,create,drop ON mydatabase.its_table TO <span class="string">'username'</span>@<span class="string">'localhost'</span>;</span><br><span class="line">$ GRANT ALL ON *.* TO <span class="string">'username'</span>@<span class="string">'localhost'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#Show privileges</span></span><br><span class="line">$ SHOW GRANTS FOR <span class="string">'username'</span>@<span class="string">'localhost'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#Revoke privileges</span></span><br><span class="line">$ REVOKE privilege ON databasename.tablename FROM <span class="string">'username'</span>@<span class="string">'localhost'</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Mysql quick settings for wordpress</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Create wordpress user, allow localhost login, set password yourself</span></span><br><span class="line">$ CREATE USER <span class="string">'wordpress_admin'</span>@<span class="string">'localhost'</span> IDENTIFIED WITH mysql_native_password BY <span class="string">'password'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#Create wordpress database</span></span><br><span class="line">$ CREATE database wordpress;</span><br><span class="line"></span><br><span class="line"><span class="comment">#Grant wordpress privileges</span></span><br><span class="line">GRANT select,insert,update,delete,create,drop ON wordpress.* TO <span class="string">'wordpress_admin'</span>@<span class="string">'localhost'</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Install-nginx"><a href="#Install-nginx" class="headerlink" title="Install nginx"></a>Install nginx</h2><figure class="highlight bash"><figcaption><span>/etc/nginx/sites-available/default</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt install nginx / brew install nginx</span><br><span class="line"></span><br><span class="line"><span class="comment">#nginx server configuration format</span></span><br><span class="line">server&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#Configuration for php</span></span><br><span class="line">server &#123;</span><br><span class="line">        <span class="comment">#80: listening port</span></span><br><span class="line">	listen 80 default_server;</span><br><span class="line">	listen [::]:80 default_server;</span><br><span class="line"></span><br><span class="line">        <span class="comment">#root directory for web files, change $HOME to your absolute path</span></span><br><span class="line">	root  <span class="variable">$HOME</span>/usr/www/html;</span><br><span class="line"></span><br><span class="line">	<span class="comment">#put index.php after index, or nginx will not work</span></span><br><span class="line">	index index.php index.html index.htm index.nginx-debian.html;</span><br><span class="line"></span><br><span class="line">	server_name _;</span><br><span class="line"></span><br><span class="line">	location / &#123;</span><br><span class="line">            <span class="comment"># First attempt to serve request as file, then</span></span><br><span class="line">            <span class="comment"># as directory, then fall back to displaying a 404.</span></span><br><span class="line">            try_files <span class="variable">$uri</span> <span class="variable">$uri</span>/ =404;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment"># pass PHP scripts to FastCGI server</span></span><br><span class="line">	location ~ \.php$ &#123;</span><br><span class="line">            <span class="comment">#wordpress root dir</span></span><br><span class="line">            root <span class="variable">$HOME</span>/usr/www/html;</span><br><span class="line">	    <span class="comment">#fastcgi</span></span><br><span class="line">	    fastcgi_index index.php;</span><br><span class="line">	    <span class="comment">#listening port for php</span></span><br><span class="line">            fastcgi_pass 127.0.0.1:9000;</span><br><span class="line">            <span class="comment">#fastcgi, change $HOME to your absolute path</span></span><br><span class="line">            fastcgi_param  SCRIPT_FILENAME  <span class="variable">$HOME</span>/usr/www/html/<span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">	    <span class="comment">#fastcgi params</span></span><br><span class="line">            include fastcgi_params;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>/etc/php/7.3/fpm/pool.d/www.conf</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#set fastcgi listing port, it is the same as the setting in nginx for php</span></span><br><span class="line">$ <span class="built_in">cd</span> /etc/php/7.3/fpm/pool.d/</span><br><span class="line"><span class="comment">#In www.conf file, find this</span></span><br><span class="line">listen = /run/php/php7.3-fpm.sock</span><br><span class="line"><span class="comment">#Change it to</span></span><br><span class="line">listen = 127.0.0.1:9000</span><br><span class="line"></span><br><span class="line"><span class="comment">#Restart nginx</span></span><br><span class="line">$ sudo service nginx restart</span><br></pre></td></tr></table></figure>
+
+<h3 id="Install-php"><a href="#Install-php" class="headerlink" title="Install php"></a>Install php</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Install php7.3-fpm and php-mysql</span></span><br><span class="line">$ sudo apt install php7.3-fpm php-mysql</span><br><span class="line"></span><br><span class="line"><span class="comment">#restart php-fpm after config www.conf file above</span></span><br><span class="line">$ sudo service php7.3-fpm restart</span><br></pre></td></tr></table></figure>
+
+<h2 id="Wordpress"><a href="#Wordpress" class="headerlink" title="Wordpress"></a>Wordpress</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Decompress wordpress files into /var/www/html/ directory</span></span><br><span class="line">$ tar xf wordpress.tar.gz</span><br><span class="line">$ cp -r wordpress/* /var/www/html/</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/wordpress/" rel="tag"># wordpress</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/28/firefox-configuration/" rel="prev" title="Firefox configuration">
+      <i class="fa fa-chevron-left"></i> Firefox configuration
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/28/hexo-set-up/" rel="next" title="Hexo+Next Settings">
+      Hexo+Next Settings <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisite"><span class="nav-number">1.</span> <span class="nav-text">Prerequisite</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-mysql8-0"><span class="nav-number">2.</span> <span class="nav-text">Install mysql8.0+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-nginx"><span class="nav-number">3.</span> <span class="nav-text">Install nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-php"><span class="nav-number">3.1.</span> <span class="nav-text">Install php</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wordpress"><span class="nav-number">4.</span> <span class="nav-text">Wordpress</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">betahxy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/betahxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;betahxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">betahxy</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
